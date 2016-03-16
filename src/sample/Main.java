@@ -37,6 +37,7 @@ public class Main extends Application {
         TextField phoneNumFld = new TextField();
         Label dobLbl = new Label("Date of Birth: ");
         TextField dobFld = new TextField();
+        Button registerBtn = new Button("Register");
 
         gridpane.add(userNameLbl, 0, 0);
         gridpane.add(userFld, 1, 0);
@@ -48,6 +49,7 @@ public class Main extends Application {
         gridpane.add(phoneNumFld, 1, 3);
         gridpane.add(dobLbl, 0, 4);
         gridpane.add(dobFld, 1, 4);
+        gridpane.add(registerBtn, 0, 5);
 
 
         //layout.setCenter(vbox);
