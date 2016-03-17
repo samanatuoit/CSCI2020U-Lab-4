@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,6 +12,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.commons.validator.routines.EmailValidator;
+
+import java.time.LocalDate;
 
 public class Main extends Application {
 
@@ -37,6 +42,9 @@ public class Main extends Application {
         Label emailLbl = new Label("Email: ");
         TextField emailFld = new TextField();
         Button registerBtn = new Button("Register");
+        Label invalidEmail = new Label();
+        EmailValidator emailValidator = EmailValidator.getInstance();
+
 
         gridpane.add(userNameLbl, 0, 0);
         gridpane.add(userFld, 1, 0);
@@ -51,8 +59,37 @@ public class Main extends Application {
         gridpane.add(dobLbl, 0, 5);
         gridpane.add(datePicker, 1, 5);
         gridpane.add(registerBtn, 1, 6);
+        gridpane.add(invalidEmail, 2,3);
 
-        registerBtn.setOnAction(evt -> System.out.println(userFld.getText() + " " + fullNameFld.getText() + " " + emailFld.getText() + " " +  phoneNumFld.getText() + " " + datePicker.getValue()));
+
+        //registerBtn.setOnAction(evt -> System.out.println(userFld.getText() + " " + fullNameFld.getText() + " " + emailFld.getText() + " " +  phoneNumFld.getText() + " " + datePicker.getValue()));
+        registerBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String username = userFld.getText();
+                String password = passFld.getText();
+                String fullname = fullNameFld.getText();
+                String email = emailFld.getText();
+                String phonenumber = phoneNumFld.getText();
+                LocalDate dateofbirth = datePicker.getValue();
+
+                System.out.println("Username: " + username);
+                System.out.println("Password: " + password);
+                System.out.println("Full name: " + fullname);
+                System.out.println("Email: " + email);
+                System.out.println("Phone number: " + phonenumber);
+                System.out.println("Date of Birth: " + dateofbirth);
+
+                if (!emailValidator.isValid(emailFld.getText())) {
+                    invalidEmail.setText("Invalid E-mail address");
+                }
+                else {
+                    invalidEmail.setText("");
+                }
+
+            }
+        });
+
 
 
         //layout.setCenter(vbox);
